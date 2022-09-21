@@ -12,7 +12,7 @@ Launcher for popular [WinSW](https://github.com/winsw/winsw) service wrapper.
 update <strong>appconfigs.json</strong> to customize WinSWLauncher
 ```
 {
-  "title": "WinSW Launcher Setting", // Form Title
+  "title": "WinSW Launcher", // Form Title
   "services": [
     {
       "display": "Service 1", // service display name in form
