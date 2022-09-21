@@ -13,6 +13,14 @@ namespace WinSWLauncher
         {
             Configuration = configuration;
             InitializeComponent();
+            if (File.Exists("app.ico"))
+            {
+                using (var stream = File.OpenRead("app.ico"))
+                {
+                    this.Icon = new Icon(stream);
+                }
+            }
+
             components = new System.ComponentModel.Container();
             var services = configuration.GetSection("services").GetChildren();
             var listSrv = services.Select(it =>
@@ -40,8 +48,10 @@ namespace WinSWLauncher
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             this.Text = Configuration["title"] ?? "Default Title";
+
+            
+           
         }
     }
 
@@ -100,37 +110,37 @@ namespace WinSWLauncher
         {
             GroupBox gb = new GroupBox();
 
-            gb.Text = this.srvcObj.displayName;
+            gb.Text = srvcObj.displayName;
             gb.Location = new Point(10, this.y);
             gb.Size = new Size(400, 55);
 
-            this.status.Text = "Status: Start";
-            this.status.Location = new Point(10, 25);
-            this.status.Size = new Size(150, 20);
-            this.status.Font = new Font("Arial", 7);
+            status.Text = "Status: Start";
+            status.Location = new Point(10, 25);
+            status.Size = new Size(150, 20);
+            status.Font = new Font("Arial", 7);
 
 
 
-            this.start.Text = "Start";
-            this.start.Location = new Point(315, 15);
-            this.start.Click += new System.EventHandler(start_Click);
-            this.start.Enabled = false;
-            this.start.AutoSize = true;
+            start.Text = "Start";
+            start.Location = new Point(315, 15);
+            start.Click += new EventHandler(start_Click);
+            start.Enabled = false;
+            start.AutoSize = true;
 
-            this.install.Text = "Install";
-            this.install.Location = new Point(235, 15);
-            this.install.Click += new System.EventHandler(install_Click);
-            this.install.Enabled = false;
-            this.install.AutoSize = true;
+            install.Text = "Install";
+            install.Location = new Point(235, 15);
+            install.Click += new EventHandler(install_Click);
+            install.Enabled = false;
+            install.AutoSize = true;
 
-            Timer timer = new System.Windows.Forms.Timer(this.container);
+            Timer timer = new System.Windows.Forms.Timer(container);
             timer.Interval = 500;
-            timer.Tick += new System.EventHandler(timer_tick);
+            timer.Tick += new EventHandler(timer_tick);
             timer.Start();
 
-            gb.Controls.Add(this.status);
-            gb.Controls.Add(this.install);
-            gb.Controls.Add(this.start);
+            gb.Controls.Add(status);
+            gb.Controls.Add(install);
+            gb.Controls.Add(start);
 
             return gb;
         }
